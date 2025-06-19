@@ -1,0 +1,21 @@
+create database assignment;
+use assignment;
+create table trainee(
+trainee_id int auto_increment primary key,
+full_name varchar(50),
+birth_date date,
+gender ENUM( 'Male', 'Female', 'Unknown') NOT NULL,
+ET_IQ tinyint unsigned,
+Evaluation_notes text
+);
+
+create table VTI_Account(
+ID smallint auto_increment primary key,
+Account_name varchar(50),
+account_code char(5),
+modified_date date
+);
+
+create table ID(
+foreign key (ID) references VTI_Account (ID)
+);
