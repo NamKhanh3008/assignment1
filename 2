@@ -1,0 +1,17 @@
+use assignment;
+select * from trainee;
+select full_name from trainee ;
+select trainee_id from trainee where full_name='khanh';
+select full_name from trainee where birth_date <'1990-01-01';
+select full_name from trainee where full_name like 'r%o';
+select * from trainee order by trainee_id desc;
+select count(distinct full_name) from trainee;
+select max(ET_IQ) from trainee;
+select * from trainee where ET_IQ='200';
+select full_name, count(trainee_id) from trainee group by full_name;
+select count(trainee_id) from trainee where trainee_id='2';
+select trainee_id from trainee where ET_IQ >150;
+select trainee_id from trainee order by length(full_name) desc;
+select trainee_id from trainee where ET_IQ > '100' order by length(full_name) desc;
+Insert into trainee(full_name) values ('haaland');
+select * from trainee where ET_IQ="100";
