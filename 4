@@ -1,0 +1,48 @@
+use testing_system_assignment_3;
+create view sales_employee as
+select userName 
+from account_table
+where departmentID = (
+select departmentID
+from department
+where departmentName="sales"
+limit 1);
+
+CREATE VIEW acc_in_most_group AS
+SELECT a.userName, a.accountID
+FROM account_table a
+JOIN group_account g ON a.accountID = g.accountID
+GROUP BY a.userName, a.accountID
+HAVING COUNT(g.groupID) = (
+  SELECT MAX(group_count)
+  FROM (
+    SELECT COUNT(groupID) AS group_count
+    FROM group_account
+    GROUP BY accountID
+  ) AS grouped_counts
+);
+CREATE VIEW long_question AS
+SELECT a.content_answer, a.questionID
+FROM answer a
+JOIN question q ON a.questionID = q.questionID
+WHERE LENGTH(a.content_answer) - LENGTH(REPLACE(a.content_answer, ' ', '')) + 1 > 300;
+
+CREATE VIEW most_employee_department AS
+SELECT d.departmentName
+FROM department d
+JOIN account_table a ON a.departmentID = d.departmentID
+GROUP BY d.departmentName
+HAVING COUNT(a.accountID) = (
+  SELECT MAX(dept_count)
+  FROM (
+    SELECT COUNT(accountID) AS dept_count
+    FROM account_table
+    GROUP BY departmentID
+  ) AS counts
+);
+
+create view nguyen_questions as
+select q.questionID
+from question q
+join account_table a on q.creatorID = a.accountID
+where a.userName like '%Nguyen%';
